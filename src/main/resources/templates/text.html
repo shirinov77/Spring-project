@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text | Text page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #979797;
+            --primary-hover: #979797;
+            --accent: #979797;
+            --text: #111827;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --bg: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --gradient: linear-gradient(135deg, #000000, #383838);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% {
+                background: var(--gradient);
+                transform: scale(1);
+            }
+            50% {
+                background: linear-gradient(135deg, #000000, #383838);
+                transform: scale(1.05);
+            }
+        }
+
+        .text-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 360px;
+            padding: 2.5rem;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+            text-align: center;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .text-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .text-greeting {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-top: 0.5rem;
+        }
+
+        .username {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .text-message {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(151, 151, 151, 0.4);
+        }
+
+        @media (max-width: 480px) {
+            .text-container {
+                padding: 1.75rem;
+                margin: 1rem;
+            }
+
+            .text-title {
+                font-size: 1.5rem;
+            }
+
+            .text-greeting {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="text-container">
+    <div class="text-header">
+        <h1 class="text-title">Asosiy sahifaga xush kelibsiz!</h1>
+        <p class="text-greeting">Salom, <span class="username" th:text="${username}"></span>!</p>
+        <p class="text-message">Hozircha ma'lumotlar yo'q yaqinda qoshiladi!</p>
+    </div>
+    <a href="/auth/logout" class="logout-btn">Hisobdan chiqish</a>
+</div>
+</body>
+</html>
