@@ -50,6 +50,14 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"));
+
+        http.rememberMe()
+                .rememberMeParameter("remember-me")
+                .rememberMeCookieName("rem-me")
+                .tokenValiditySeconds(24 * 60 * 60)
+                .key("barbirtopolmaysan")
+                .userDetailsService(customUserDetailsService);
+
         return http.build();
 
     }
