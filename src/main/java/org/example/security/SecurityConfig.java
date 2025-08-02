@@ -15,10 +15,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
+    private final CustomAuthenticatedFailHandler customAuthenticatedFailHandler;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticatedFailHandler customAuthenticatedFailHandler) {
         this.customUserDetailsService = customUserDetailsService;
+        this.customAuthenticatedFailHandler = customAuthenticatedFailHandler;
     }
 
 
@@ -43,7 +45,8 @@ public class SecurityConfig {
                 .loginProcessingUrl("/auth/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/text", true);
+                .defaultSuccessUrl("/text", true)
+                        .failureHandler(customAuthenticatedFailHandler);
 
         http.logout()
                 .logoutUrl("/auth/logout")
